@@ -15,10 +15,10 @@ class TasksController < ApplicationController
         @task = Task.new(task_params)
         
         if @task.save
-           flash[:success] = "taskが正常に作成されました"
+           flash[:success] = "タスクが正常に作成されました"
            redirect_to @task
         else
-            flash.now[:danger] = 'taskが作成されませんでした'
+            flash.now[:danger] = 'タスクが作成されませんでした'
             render :new
         end
     end
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         
         if @task.update(task_params)
-            flash[:success] = "taskは正常に更新されました"
+            flash[:success] = "タスクは正常に更新されました"
             redirect_to @task
         else
             flash.now[:danger] = "タスクは更新されませんでした"
@@ -41,6 +41,11 @@ class TasksController < ApplicationController
     end
     
     def destroy
+        @task = Task.find(params[:id])
+    @task.destroy
+
+    flash[:success] = 'タスク は正常に削除されました'
+    redirect_to messages_url
     end
     
     private
